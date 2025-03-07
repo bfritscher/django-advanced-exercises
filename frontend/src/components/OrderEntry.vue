@@ -61,10 +61,7 @@ export default {
         url: `${API_URL}/api/orders/${this.order.id}/`,
         data: {
           customer_received: true
-        },
-        xsrfCookieName: "csrftoken",
-        xsrfHeaderName: "X-CSRFTOKEN",
-        withXSRFToken: true
+        }
       })
         .then(() => {
           this.isConfirmed = true

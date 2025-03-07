@@ -27,14 +27,7 @@ class OrderLineSerializer(serializers.ModelSerializer):
         return obj.total
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    customer = CustomerSerializer(read_only=True)
-    total = serializers.SerializerMethodField()
-    orderlines = OrderLineSerializer(many=True, read_only=True)
-    
+class OrderSerializer(serializers.ModelSerializer):    
     class Meta:
         model = models.Order
         fields = "__all__"
-    
-    def get_total(self, obj):
-        return obj.total

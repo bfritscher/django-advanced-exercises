@@ -21,33 +21,8 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
 
-class OrderLineInline(admin.TabularInline):
-    model = models.OrderLine
-    extra = 1
-    raw_id_fields = ('product',)
-    readonly_fields = ('line_total',)
-    
-    def line_total(self, obj):
-        return obj.total if obj.id else "N/A"
-    line_total.short_description = "Line Total"
-
-
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'created_at', 'customer', 'display_total')
-    inlines = [OrderLineInline]
-    autocomplete_fields = ['customer']
-    search_fields = ['customer__username', 'customer__email', 'customer__first_name', 'customer__last_name']
-    list_filter = ('created_at', 'customer')
-    
-    fieldsets = (
-        ('Customer Information', {
-            'fields': ('customer', 'customer_received')
-        }),
-    )
-    
-    def display_total(self, obj):
-        return obj.total
-    display_total.short_description = "Total"
+    pass
 
 admin.site.register(models.Product, ProductAdmin)
 admin.site.register(models.Order, OrderAdmin)
